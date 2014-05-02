@@ -1,0 +1,2 @@
+class SourController < ApplicationController
+end

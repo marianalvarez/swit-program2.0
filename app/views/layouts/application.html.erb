@@ -1,14 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SwitProgram20</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Switter</title>
+      <%= stylesheet_link_tag    "application" %>
+      <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
+  <script>
+function go() {
+    var txt=document.getElementById("txt");
+    txt.onkeydown = countTxt;
+    txt.onkeyup = countTxt1;
+}
+function countTxt() {
+    var txt=document.getElementById("txt");
+    var count=document.getElementById("count");
+
+     // count the character not shown yet ;)
+   
+      count.innerHTML = 140-txt.value.length;
+      
+    
+}
+function countTxt1() {
+    var txt=document.getElementById("txt");
+    var count=document.getElementById("count");
+
+     // count the character not shown yet ;)
+   
+      count.innerHTML = 140-txt.value.length;
+      
+    
+}
+</script>
+
 </head>
-<body>
 
-<%= yield %>
 
-</body>
+  <body onload="go()">
+
+  <header>
+        <div class="wrapper">
+            <div id="move"><h1>Switter</h1></div>
+            <% if current_user %>
+                <div id="button_user">
+                Welcome <%= current_user.username %>! | <%= link_to "Home", articles_path %> |
+                <%= link_to "Change Password", edit_user_path(current_user) %> | <%= link_to "Log Out", sessions_destroy_path %>
+              </div>
+            <% else %>
+                <%= form_tag sessions_create_path do %>
+
+                   <div id="button_log" class="row">
+                      <div class="small-12">
+                        <div class="row">
+                         
+                          <div class="small-3 columns">
+                            <%= text_field_tag :username, nil, placeholder: "Username" %> 
+                          </div>
+                          
+                          <div class="small-3 columns">
+                            <%= password_field_tag :password, nil,  placeholder: "Password" %>
+                          </div>
+                          <%= submit_tag "Log In", :class => 'button tiny' %>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </header>
+<div id="flash_notice" style="display:none"></div>
+    <div id="content">
+        <div class="wrapper">
+            <% flash.each do |username, msg| %>
+                <%= content_tag :div, msg, class: "flash #{username}" %>
+            <% end %>
+            <%= yield %>
+        </div>
+    </div>
+  </body>
 </html>
+
+

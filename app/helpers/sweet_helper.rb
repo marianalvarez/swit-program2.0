@@ -1,0 +1,2 @@
+module SweetHelper
+end

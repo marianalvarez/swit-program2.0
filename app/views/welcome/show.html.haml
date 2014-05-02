@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Username:
+  = @welcom.username
+%p
+  %b Password:
+  = @welcom.password
+
+= link_to 'Edit', edit_welcom_path(@welcom)
+\|
+= link_to 'Back', welcoms_path

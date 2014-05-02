@@ -1,0 +1,16 @@
+= form_for @switterapp do |f|
+  - if @switterapp.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@switterapp.errors.count, "error")} prohibited this switterapp from being saved:"
+      %ul
+        - @switterapp.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :username
+    = f.text_field :username
+  .field
+    = f.label :password
+    = f.text_field :password
+  .actions
+    = f.submit 'Save'

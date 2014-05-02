@@ -1,0 +1,11 @@
+<% form_for(:user, :url => update_password_path) do |f| %>
+<%= f.hidden_field(:id, :value => @user_logged_in.id) %>
+<%= hidden_field(:user, :updating_password, :value => 1) %>
+<p><label for="users_old_password">Old Password</label><br/>
+<%= password_field(:pass, :old_password) %></p>
+<p><label for="users_new_password">New Password</label><br/>
+<%= f.password_field(:password, :value => '') %></p>
+<p><label for="users_confirm_password">Confirm New Password</label><br/>
+<%= f.password_field(:password_confirmation) %></p>
+<p><%= image_submit_tag('site/buttons/btn_save.gif') %></p>
+<% end %>

@@ -1,0 +1,2 @@
+class SwitpostsController < ApplicationController
+end

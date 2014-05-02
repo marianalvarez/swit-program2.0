@@ -1,0 +1,103 @@
+<div id="body">
+<br/>
+
+<%= render 'form' %>
+
+
+<div id="swits">
+
+<% for article in @articles %>
+ <div id="articles">
+<div id="thumb"><%= image_tag("download.jpeg", :alt => "rss feed") %></div>
+<br/>
+<% text = article.text %>
+<% article.text.scan(/{(.*?)}/) do |f| %>
+
+              <% text = text.gsub('{' + f[0] + '}', "<a data-method=\"get\" href=\"\/door_tag\?tag=" + f[0] + "\">\{" + f[0] + "\}</a>").html_safe  %>
+
+
+<% end %>
+
+
+
+<strong>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp<%= article.title %></strong>
+  <div id="commented"><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbspPosted <%= time_ago_in_words(article.created_at) %> ago</div>
+  <br/>
+  <p>&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp<%= text %></p>
+  
+  <p>
+<% @sweet= Sweet.new%>
+<%= form_for([article, @sweet], :html => {:class => 'sweet_form'}) do |f| %>
+  <% if @sweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sweet.errors.count, "error") %> prohibited this sweet from being saved:</h2>
+      <ul>
+      <% @sweet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <input id="sweet_article_id" name="sweet[article_id]" type="hidden" value="<%= @article.id%>" />
+ &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp<input name="commit" type="submit" class= "button tiny" value="Sweet" />
+<% end %>
+</p>
+
+<div id="sour">
+<% @sour= Sour.new%>
+
+<%= form_for([article, @sour], :html => {:class => 'sour_form'}) do |f| %>
+  <% if @sour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sour.errors.count, "error") %> prohibited this sour from being saved:</h2>
+
+      <ul>
+      <% @sour.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <input id="sour_article_id" name="sour[article_id]" type="hidden" value="<%= @article.id%>" />
+  &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp<input name="commit" type="submit" class= "button tiny" value="Sour" />
+<% end %>
+
+</div>
+<div id="sweetour">
+&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp<%= link_to pluralize(article.sweets.count.to_s, "sweet")%> &nbsp |  &nbsp    
+
+<%= link_to pluralize(article.sours.count.to_s, "sour")%> &nbsp  | &nbsp 
+
+<%= link_to 'Delete', article_path(article),
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+</p>
+
+<hr>
+</div>
+<div id="commentsSection">
+
+
+<%=render :partial => article.comments %>
+<br/>
+ <%= form_for([article, article.comments.build],  :remote => true )   do |f| %>
+  <%= f.hidden_field :commenter, :value => current_user.username %>
+  <div id="commentbox">
+    
+    <%= f.text_area :body , placeholder: "Enter comment", :class => "small-9 columns"%>
+  </div>
+  <p>
+    <%= f.submit :Comment, :class => "button tiny" %>
+  </p>
+<% end %>                   
+
+
+<br/>
+</div>
+<% end %>
+
+</div>
+</div>
+
+

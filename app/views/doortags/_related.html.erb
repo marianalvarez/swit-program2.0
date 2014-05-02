@@ -1,0 +1,10 @@
+<div id="body">
+<br/><br/><br/><br/><br/><p>hello</p>
+<% @doortags.each do |doortag| %>
+
+<%= doortag.tag %>
+<%= @articles.where(id: doortag.article_id).first.text %>
+<%= doortag.article_id %>
+<%end%>
+
+</div>

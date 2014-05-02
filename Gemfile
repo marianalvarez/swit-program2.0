@@ -38,5 +38,13 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Use gem devise
-gem 'devise'
+# Use haml
+gem 'haml-rails'
+
+# Use gem socialization
+gem 'socialization'
+# Use foundation
+gem 'foundation-rails'
+gem 'bcrypt-ruby' 
+# Use sorcery
+gem 'sorcery'

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Username:
+  = @switterapp.username
+%p
+  %b Password:
+  = @switterapp.password
+
+= link_to 'Edit', edit_switterapp_path(@switterapp)
+\|
+= link_to 'Back', switterapps_path

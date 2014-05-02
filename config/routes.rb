@@ -1,15 +1,43 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'home/index'
 
-  devise_for :models
-  root to: "home#index"
+  
+  get 'doortags/related'
+  get 'sessions/login'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  get 'sessions/home'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  get 'sessions/profile'
+
+  get 'sessions/setting'
+get "sessions/new"
+get "sessions/create"
+get "sessions/destroy"
+post "sessions/create"
+  get 'sessions/login_attempt'
+  post 'sessions/login_attempt'
+  
+get 'users/edit'
+  get 'switpost/new'
+  post 'switpost/new'
+  get 'post/index'
+  get 'sessions/new'
+  get 'welcome/index'
+
+  get 'users/index'
+  get 'users/new'
+  root to: 'users#new'
+
+resources :user_sessions
+resources :users
+resources :post
+
+resources :articles do
+  resources :comments, :users, :sweets, :sours, :doortags
+end
+
+
+get '/door_tag' => 'doortags#related'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

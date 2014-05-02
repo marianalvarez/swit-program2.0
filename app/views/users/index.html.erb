@@ -1,0 +1,11 @@
+ <h1>Public Profile</h1>
+    <% @users.each do |user| %>
+    <div class="ribbitWrapper">
+        <a href="<%= user_path user %>">
+            
+            <span class="name"><%= user.username %></span> 
+        </a>
+        @<%= user.username %>
+       
+    </div>
+    <% end %>

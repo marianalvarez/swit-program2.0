@@ -1,0 +1,26 @@
+<div id="body1">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+
+	<br/>
+	<br/>
+	<div id="pass"><%= image_tag("password.jpg", :alt => "rss feed") %> </div>
+<div id="changePassword">
+
+<br/>
+<%= form_for(@user) do |f| %>
+     
+      <%= f.label :Username %>
+      <%= f.text_field :username %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Save changes", class: "button tiny push-4" %>
+    <% end %>
+   </div>
+  </div>

@@ -1,0 +1,21 @@
+%h1 Listing welcoms
+
+%table
+  %tr
+    %th Username
+    %th Password
+    %th
+    %th
+    %th
+
+  - @welcoms.each do |welcom|
+    %tr
+      %td= welcom.username
+      %td= welcom.password
+      %td= link_to 'Show', welcom
+      %td= link_to 'Edit', edit_welcom_path(welcom)
+      %td= link_to 'Destroy', welcom, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Welcom', new_welcom_path

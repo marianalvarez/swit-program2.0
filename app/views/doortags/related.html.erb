@@ -1,0 +1,24 @@
+<div id="body1">
+<br/><br/><br/><br/><br/>
+<div id="fonts">
+	<%= image_tag("posts.jpg", :alt => "rss feed") %>
+</div>
+
+<div id="doortags">
+
+<% @doortags.each do |doortag| %>
+<div id="articles">
+<div id="thumb"><%= image_tag("download.jpeg", :alt => "rss feed") %></div>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong><%= @articles.where(id: doortag.article_id).first.title %></strong>
+<div id="commented"><br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbspPosted <%= time_ago_in_words(@articles.where(id: doortag.article_id).first.created_at) %> ago</div>
+<p>
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp&nbsp<%= @articles.where(id: doortag.article_id).first.text %>
+
+</p>
+<hr>
+
+<%end%>
+</div>
+</div>
+
+

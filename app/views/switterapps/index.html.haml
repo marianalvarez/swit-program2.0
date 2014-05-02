@@ -1,0 +1,21 @@
+%h1 Listing switterapps
+
+%table
+  %tr
+    %th Username
+    %th Password
+    %th
+    %th
+    %th
+
+  - @switterapps.each do |switterapp|
+    %tr
+      %td= switterapp.username
+      %td= switterapp.password
+      %td= link_to 'Show', switterapp
+      %td= link_to 'Edit', edit_switterapp_path(switterapp)
+      %td= link_to 'Destroy', switterapp, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Switterapp', new_switterapp_path

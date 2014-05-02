@@ -1,0 +1,21 @@
+%h1 Listing switters
+
+%table
+  %tr
+    %th Username
+    %th Password
+    %th
+    %th
+    %th
+
+  - @switters.each do |switter|
+    %tr
+      %td= switter.username
+      %td= switter.password
+      %td= link_to 'Show', switter
+      %td= link_to 'Edit', edit_switter_path(switter)
+      %td= link_to 'Destroy', switter, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Switter', new_switter_path

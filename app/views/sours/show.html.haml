@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Commenter:
+  = @sour.commenter
+%p
+  %b Article:
+  = @sour.article_id
+
+= link_to 'Edit', edit_article_sour_path(@article, @sour)
+\|
+= link_to 'Back', article_sours_path(@article)
